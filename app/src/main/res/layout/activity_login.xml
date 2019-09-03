@@ -26,20 +26,6 @@
             android:layout_margin="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/prompt_nombre"/>
-
-    <EditText
-            android:id="@+id/etNombre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/prompt_nombre"
-            android:inputType="text" />
-
-    <TextView
-            android:layout_margin="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@string/prompt_email"/>
 
     <EditText

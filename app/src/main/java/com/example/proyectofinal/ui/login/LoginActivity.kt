@@ -1,12 +1,11 @@
 package com.example.proyectofinal.ui.login
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.Toolbar
-import android.text.Editable
-import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -15,7 +14,7 @@ import com.example.proyectofinal.R
 
 class LoginActivity : AppCompatActivity() {
 
-    var administradores = arrayOf("Eric", "Ale", "Seba")
+    var administradores = arrayOf("Eric@istea.com", "Ale@istea.com", "Seba@istea.com")
 
 
     lateinit var toolbar: Toolbar
@@ -119,33 +118,32 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setupUI() {
         toolbar = findViewById(R.id.toolbarMain)
-        etNombre = findViewById(R.id.etNombre)
         etEmail = findViewById(R.id.etEmail)
         etPass = findViewById(R.id.etPass)
         btnAceptar = findViewById(R.id.btnAceptar)
         btnRegister = findViewById(R.id.btnRegister)
+        btnRegister.setTextColor(Color.BLUE)
 
-        val nombre = etNombre.text.toString()
         val email = etEmail.text.toString()
         val password = etPass.text.toString()
 
         btnAceptar.setOnClickListener {
-            if(validarCampos() && validarUsuarioRegistrado()){
-                if(validarAdmin(nombre, email, password)){
-                    Toast.makeText(this, "Bienvenido " + (etNombre.text.toString()), Toast.LENGTH_LONG).show()
+            //if(validarCampos() && validarUsuarioRegistrado()){
+                //if(validarAdmin(email, password)){
+                    //Toast.makeText(this, "Bienvenido " + (etNombre.text.toString()), Toast.LENGTH_LONG).show()
                     val intent = Intent(this, CanchasAdminActivity::class.java)
-                    intent.putExtra("Nombre", etNombre.text.toString())
+                    //intent.putExtra("Email", etEmail.text.toString())
                     startActivity(intent)
-                    finish()
-                } else {
+                    //finish()
+                /*} else {
                     Toast.makeText(this, "Bienvenido " + (etNombre.text.toString()), Toast.LENGTH_LONG).show()
                     val intent = Intent(this, CanchasUserActivity::class.java)
                     intent.putExtra("Nombre", etNombre.text.toString())
                     startActivity(intent)
                     finish()
-                }
+                }*/
 
-            }
+            //}
         }
 
         btnRegister.setOnClickListener {
@@ -164,19 +162,10 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-
-
-
     private fun validarCampos():Boolean {
-        val nombre = etNombre.text
         val email = etEmail.text
         val password = etPass.text
 
-        if(nombre.isNullOrEmpty() || nombre.isNullOrBlank() ) {
-            Toast.makeText(this, getString(R.string.validateNameError) , Toast.LENGTH_LONG).show()
-            etNombre.error = getString(R.string.validateNameError)
-            return false
-        }
         if(email.isNullOrEmpty() || email.isNullOrBlank() ) {
             Toast.makeText(this, getString(R.string.validateEmailError) , Toast.LENGTH_LONG).show()
             etEmail.error = getString(R.string.validateEmailError)
@@ -213,9 +202,9 @@ class LoginActivity : AppCompatActivity() {
         return true
     }
 
-    private fun validarAdmin(nombre: String, email: String, password: String): Boolean {
+    private fun validarAdmin(email: String, password: String): Boolean {
         for (item in administradores) {
-            if (item == nombre) {
+            if (item == email) {
                 return true
             }
         }
@@ -223,10 +212,8 @@ class LoginActivity : AppCompatActivity() {
     }
 }
 
-/**
- * Extension function to simplify setting an afterTextChanged action to EditText components.
- */
-fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+
+/*fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(editable: Editable?) {
             afterTextChanged.invoke(editable.toString())
@@ -236,4 +223,4 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
     })
-}
+}*/

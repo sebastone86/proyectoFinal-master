@@ -1,6 +1,5 @@
 package com.example.proyectofinal.data
 
-import com.example.proyectofinal.data.model.LoggedInUser
 import java.io.IOException
 
 /**
@@ -8,7 +7,7 @@ import java.io.IOException
  */
 class LoginDataSource {
 
-    fun login(username: String, password: String): Result<LoggedInUser> {
+    /*fun login(username: String, password: String): Result<LoggedInUser> {
         try {
             // TODO: handle loggedInUser authentication
             val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe")
@@ -20,6 +19,6 @@ class LoginDataSource {
 
     fun logout() {
         // TODO: revoke authentication
-    }
+    }*/
 }
 
