@@ -4,11 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyectofinal.R
 
-class CanchasUserActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_canchas_admin)
+        setContentView(R.layout.activity_register)
     }
 
 }

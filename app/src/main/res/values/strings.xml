@@ -21,6 +21,7 @@
     <string name="validatePassError">Debes colocar el password</string>
     <string name="title_activity_canchas_admin">CanchasAdminActivity</string>
     <string name="title_activity_canchas_user">CanchasUserActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
 
 
 </resources>

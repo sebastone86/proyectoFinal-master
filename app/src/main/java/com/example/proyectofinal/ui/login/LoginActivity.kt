@@ -1,32 +1,24 @@
 package com.example.proyectofinal.ui.login
 
-import android.app.Activity
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.StringRes
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.AppCompatTextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.appcompat.widget.Toolbar
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ProgressBar
 import android.widget.Toast
 
 import com.example.proyectofinal.R
-import java.lang.reflect.Array
 
 class LoginActivity : AppCompatActivity() {
 
     var administradores = arrayOf("Eric", "Ale", "Seba")
 
 
-
-    private lateinit var loginViewModel: LoginViewModel
+    lateinit var toolbar: Toolbar
     lateinit var etNombre: EditText
     lateinit var etEmail: EditText
     lateinit var etPass: EditText
@@ -39,10 +31,10 @@ class LoginActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_login)
 
-        val loading = findViewById<ProgressBar>(R.id.loading)
-
         setupUI()
+        initializeToolbar()
 
+        /*al loading = findViewById<ProgressBar>(R.id.loading)
 
         loginViewModel = ViewModelProviders.of(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
@@ -107,10 +99,26 @@ class LoginActivity : AppCompatActivity() {
                 loading.visibility = View.VISIBLE
                 loginViewModel.login(etEmail.text.toString(), etPass.text.toString())
             }
-        }
+        }*/
     }
 
+    /*private fun showLoginFailed(@StringRes errorString: Int) {
+        Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun updateUiWithUser(model: LoggedInUserView) {
+        val welcome = getString(R.string.welcome)
+        val displayName = model.displayName
+
+        Toast.makeText(
+            applicationContext,
+            "$welcome $displayName",
+            Toast.LENGTH_LONG
+        ).show()
+    }*/
+
     private fun setupUI() {
+        toolbar = findViewById(R.id.toolbarMain)
         etNombre = findViewById(R.id.etNombre)
         etEmail = findViewById(R.id.etEmail)
         etPass = findViewById(R.id.etPass)
@@ -140,26 +148,24 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        /*btnRegister.setOnClickListener {
+        btnRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
-        }*/
+        }
     }
 
-    private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome)
-        val displayName = model.displayName
-        // TODO : initiate successful logged in experience
-        Toast.makeText(
-            applicationContext,
-            "$welcome $displayName",
-            Toast.LENGTH_LONG
-        ).show()
+    private fun initializeToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        supportActionBar?.title = getString(R.string.app_name)
+
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayUseLogoEnabled(true)
+
     }
 
-    private fun showLoginFailed(@StringRes errorString: Int) {
-        Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
-    }
+
+
 
     private fun validarCampos():Boolean {
         val nombre = etNombre.text
