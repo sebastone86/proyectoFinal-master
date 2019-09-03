@@ -1,13 +1,26 @@
 <resources>
+    <!-- LOGIN -->
+    <string name="ingresar_datos">Ingrese sus datos para poder ingresar</string>
     <string name="app_name">ProyectoFinal</string>
     <string name="title_activity_login">Sign in</string>
-    <string name="prompt_user">User</string>
+    <string name="prompt_nombre">Nombre completo</string>
+    <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="registrarse">No tenes cuenta? Registrate</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+    <!-- ERRORES Y VALIDACIONES -->
+    <string name="validateNameError">Debes loguearte con un nombre</string>
+    <string name="validateEmailError">Debes loguearte con un email</string>
+    <string name="validatePassError">Debes colocar el password</string>
+    <string name="title_activity_canchas_admin">CanchasAdminActivity</string>
+    <string name="title_activity_canchas_user">CanchasUserActivity</string>
+
 
 </resources>

@@ -10,6 +10,14 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
+                android:name=".ui.login.CanchasUserActivity"
+                android:label="@string/title_activity_canchas_user">
+        </activity>
+        <activity
+                android:name=".ui.login.CanchasAdminActivity"
+                android:label="@string/title_activity_canchas_admin">
+        </activity>
+        <activity
                 android:name=".ui.login.LoginActivity"
                 android:label="@string/title_activity_login">
             <intent-filter>
