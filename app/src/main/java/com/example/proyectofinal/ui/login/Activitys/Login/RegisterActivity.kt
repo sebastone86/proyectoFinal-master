@@ -15,13 +15,13 @@ import java.sql.SQLException
 
 class RegisterActivity : AppCompatActivity() {
 
-    lateinit var toolbar: Toolbar
-    lateinit var btnCancelar: Button
-    lateinit var btnAceptar: Button
-    lateinit var etNombre: EditText
-    lateinit var etApellido: EditText
-    lateinit var etEmail: EditText
-    lateinit var etPass: EditText
+    private lateinit var toolbar: Toolbar
+    private lateinit var btnCancelar: Button
+    private lateinit var btnAceptar: Button
+    private lateinit var etNombre: EditText
+    private lateinit var etApellido: EditText
+    private lateinit var etEmail: EditText
+    private lateinit var etPass: EditText
 
 
 
@@ -38,6 +38,10 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
+        etNombre= findViewById(R.id.etNombre)
+        etApellido= findViewById(R.id.etApellido)
+        etEmail= findViewById(R.id.etEmail)
+        etPass= findViewById(R.id.etPass)
         toolbar = findViewById(R.id.toolbarRegister)
         btnCancelar = findViewById(R.id.btnCancelar)
         btnAceptar = findViewById(R.id.btnAceptar)
