@@ -12,13 +12,6 @@
     <string name="cancelar">Cancelar</string>
     <string name="registrarse">No tenes cuenta? Registrate</string>
 
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-
     <!-- ERRORES Y VALIDACIONES -->
     <string name="validateNameError">Debes loguearte con un nombre</string>
     <string name="validateEmailError">Debes loguearte con un email</string>
@@ -27,5 +20,6 @@
     <string name="title_activity_canchas_user">CanchasUserActivity</string>
     <string name="title_activity_register">RegisterActivity</string>
 
+    <string name="validateEmpty">El campo no puede estar vacio </string>
 
 </resources>

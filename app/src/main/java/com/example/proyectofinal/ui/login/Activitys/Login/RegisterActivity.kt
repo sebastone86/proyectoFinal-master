@@ -49,11 +49,33 @@ class RegisterActivity : AppCompatActivity() {
             finish()
         }
         btnAceptar.setOnClickListener {
-            agregarUsuario()
-            finish()
+          if(  validarDatos() ){
+              agregarUsuario()
+              finish()
+          }
         }
     }
 
+    private fun validarDatos():Boolean{
+
+        if(etNombre.text.isNullOrEmpty()){
+            etNombre.error = getString(R.string.validateEmpty)
+            return false
+        }
+        if(etApellido.text.isNullOrEmpty()){
+            etApellido.error = getString(R.string.validateEmpty)
+            return false
+        }
+        if(etEmail.text.isNullOrEmpty()){
+            etEmail.error = getString(R.string.validateEmpty)
+            return false
+        }
+        if(etPass.text.isNullOrEmpty()){
+            etPass.error = getString(R.string.validateEmpty)
+            return false
+        }
+        return true
+    }
     private fun agregarUsuario(){
         var comm: PreparedStatement
         var conn : Connection?
@@ -64,14 +86,14 @@ class RegisterActivity : AppCompatActivity() {
             if (conn != null) {
                 comm = conn.prepareStatement("insert into Usuario("
                         + "nombre, apellido , email , pass , tipo_usuario ) values(?,?,?,?,?)")
-                comm.setString(1, etNombre.getText().toString());
-                comm.setString(2, etApellido.getText().toString());
-                comm.setString(3, etEmail.getText().toString());
-                comm.setString(4, etPass.getText().toString());
-                comm.setString(5, "USUARIO");
+                comm.setString(1, etNombre.getText().toString())
+                comm.setString(2, etApellido.getText().toString())
+                comm.setString(3, etEmail.getText().toString())
+                comm.setString(4, etPass.getText().toString())
+                comm.setString(5, "USUARIO")
                 // run commandto add new rocord
-                comm.executeUpdate();
-            };
+                comm.executeUpdate()
+            }
 
         } catch ( e : SQLException) {
             Toast.makeText(applicationContext , e.message , Toast.LENGTH_LONG).show()
