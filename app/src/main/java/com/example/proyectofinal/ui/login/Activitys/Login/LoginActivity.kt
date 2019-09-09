@@ -13,6 +13,7 @@ import android.widget.Toast
 
 import com.example.proyectofinal.R
 import com.example.proyectofinal.ui.login.Activitys.Canchas.CanchasAdminActivity
+import com.example.proyectofinal.ui.login.Activitys.Canchas.CanchasUserActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -51,9 +52,21 @@ class LoginActivity : AppCompatActivity() {
 
         btnAceptar.setOnClickListener {
 
-            validarCampos()
-            val intent = Intent(this, CanchasAdminActivity::class.java)
-            startActivity(intent)
+            var intent:Intent
+            if (validarCampos()
+                    && validarUsuarioRegistrado()
+                ){
+                /* SI ES ADMIN VA A LA ACTIVITY DE ADMIN SI NO A LA DE USUARIOS */
+                if(validarAdmin()) {
+                    intent =  Intent(this, CanchasAdminActivity::class.java)
+                    startActivity(intent)
+                }else{
+
+                    intent = Intent(this, CanchasUserActivity::class.java)
+                    startActivity(intent)
+                }
+
+            }
         }
 
         btnRegister.setOnClickListener {
@@ -94,7 +107,9 @@ class LoginActivity : AppCompatActivity() {
         return true
     }
 
-    private fun validarAdmin(email: String, password: String): Boolean {
+    private fun validarAdmin(): Boolean {
+        /* revisar esta validacion */
+       val email =  etEmail.text.toString()
         for (item in administradores) {
             if (item == email) {
                 return true

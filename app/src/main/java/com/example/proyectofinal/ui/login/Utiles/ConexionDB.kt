@@ -27,8 +27,9 @@ class ConexionDB {
              val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
              StrictMode.setThreadPolicy(policy)
              Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance();
-             conn = DriverManager.getConnection("jdbc:jtds:sqlserver://localhost//proyecto_final;instance=SQL2014;"
-                        +"user=ERGO FU5;")
+             conn = DriverManager.getConnection("jdbc:jtds:sqlserver://10.0.47.175:1433//proyecto_final;encrypt=true;instance=SQLEXPRESS;"
+                        +"user=LAPTOP-37NOI2VQ\\ERGO FU5;")
+
          }catch ( e:Exception ){
 
              Toast.makeText( context , e.message, Toast.LENGTH_LONG).show()
