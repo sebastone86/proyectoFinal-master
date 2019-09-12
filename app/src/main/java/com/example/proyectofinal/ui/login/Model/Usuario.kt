@@ -1,5 +1,19 @@
 package com.example.proyectofinal.data.model
 
+import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-class Usuario (var id: Int?, var nombre: String, var apellido: String?, var email: String, var password: String, var tipoUsuario: Int) : Serializable {}
+class Usuario (
+    @SerializedName("id")
+    var id: Int?,
+    @SerializedName("nombre")
+    var nombre: String,
+    @SerializedName("id")
+    var apellido: String?,
+    @SerializedName("email")
+    var email: String,
+    @SerializedName("password")
+    var password: String,
+    @SerializedName("tipoUsuario")
+    var tipoUsuario: TipoUsuario
+)
