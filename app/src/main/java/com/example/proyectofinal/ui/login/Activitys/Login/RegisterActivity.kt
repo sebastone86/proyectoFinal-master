@@ -8,7 +8,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyectofinal.R
 import androidx.appcompat.widget.Toolbar
+import com.example.proyectofinal.ui.login.Model.IApiServices
 import com.example.proyectofinal.ui.login.Utiles.ConexionDB
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.sql.Connection
 import java.sql.PreparedStatement
 import java.sql.SQLException
@@ -31,6 +34,7 @@ class RegisterActivity : AppCompatActivity() {
 
         setupUI()
         initializeToolbar()
+        instanceRetroFitService()
     }
     private fun initializeToolbar() {
         setSupportActionBar(toolbar)
@@ -54,6 +58,18 @@ class RegisterActivity : AppCompatActivity() {
               finish()
           }
         }
+    }
+
+    private fun instanceRetroFitService() : IApiServices? {
+        val service : IApiServices
+        val retrofit = Retrofit.Builder()
+            .baseUrl("") //URL DEL SERVICIOOOO
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+            service = retrofit.create(IApiServices::class.java)
+
+        return service
     }
 
     private fun validarDatos():Boolean{

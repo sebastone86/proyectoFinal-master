@@ -15,6 +15,12 @@ interface IApiServices {
     fun getPostById(@Query("id") id: Int) : Call<Usuario>
 
     @POST("user/{id}")
-    fun editPostById (@Path ("id") id:Int , @Body post: Usuario?) : Call<Usuario>
+    fun editPostById (@Query ("id") id:Int) : Call<Usuario>
+
+    @POST("register")
+    @FormUrlEncoded
+    fun registerUserPost(@Field("email") email: String,
+                         @Field("password") password: String,
+                         @Field("nombre") nombre: String): Call<Usuario>
 
 }
