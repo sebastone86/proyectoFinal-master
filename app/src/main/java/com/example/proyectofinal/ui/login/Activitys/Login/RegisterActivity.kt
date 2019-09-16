@@ -2,21 +2,26 @@ package com.example.proyectofinal.ui.Activitys.Login
 
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyectofinal.R
 import androidx.appcompat.widget.Toolbar
+import com.example.proyectofinal.data.model.Usuario
 import com.example.proyectofinal.ui.login.Model.IApiServices
-import com.example.proyectofinal.ui.login.Utiles.ConexionDB
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.sql.Connection
-import java.sql.PreparedStatement
-import java.sql.SQLException
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class RegisterActivity : AppCompatActivity() {
+
+    var mAPIService: IApiServices? = null
+    val builder = AlertDialog.Builder(this)
 
     private lateinit var toolbar: Toolbar
     private lateinit var btnCancelar: Button
@@ -34,8 +39,8 @@ class RegisterActivity : AppCompatActivity() {
 
         setupUI()
         initializeToolbar()
-        instanceRetroFitService()
     }
+
     private fun initializeToolbar() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
@@ -52,24 +57,44 @@ class RegisterActivity : AppCompatActivity() {
         btnCancelar.setOnClickListener {
             finish()
         }
+
         btnAceptar.setOnClickListener {
           if(  validarDatos() ){
-              agregarUsuario()
+              registerUser()
               finish()
           }
         }
     }
 
-    private fun instanceRetroFitService() : IApiServices? {
-        val service : IApiServices
-        val retrofit = Retrofit.Builder()
-            .baseUrl("") //URL DEL SERVICIOOOO
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+    private fun registerUser() {
+        mAPIService = IApiServices.ApiUtils.apiService
 
-            service = retrofit.create(IApiServices::class.java)
+        //Some Button click
+        mAPIService!!.registerUserPost("SampleTest2@gamil.com", "123456", "nombre", "apellido").enqueue(object :
+            Callback<Usuario> {
 
-        return service
+            override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
+                Log.i("", "post submitted to API." + response.body()!!)
+
+                if (response.isSuccessful()) {
+                    Log.i("", "post registration to API" + response.body()!!.toString())
+                    builder.setTitle("Maravilloso")
+                    builder.setMessage("El usuario se creo correctamente")
+                    builder.setPositiveButton(android.R.string.ok) { _,_ ->
+                        Toast.makeText(applicationContext,
+                            android.R.string.ok, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            override fun onFailure(call: Call<Usuario>, t: Throwable) {
+                builder.setTitle("Error")
+                builder.setMessage("El usuario no se ha podido crear")
+                builder.setNegativeButton(android.R.string.ok) { _,_ ->
+                    Toast.makeText(applicationContext,
+                        android.R.string.ok, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 
     private fun validarDatos():Boolean{
@@ -91,28 +116,5 @@ class RegisterActivity : AppCompatActivity() {
             return false
         }
         return true
-    }
-    private fun agregarUsuario(){
-        var comm: PreparedStatement
-        var conn : Connection?
-
-        conn = ConexionDB().getInstance()?.getConnetion(applicationContext)
-        try {
-
-            if (conn != null) {
-                comm = conn.prepareStatement("insert into Usuario("
-                        + "nombre, apellido , email , pass , tipo_usuario ) values(?,?,?,?,?)")
-                comm.setString(1, etNombre.getText().toString())
-                comm.setString(2, etApellido.getText().toString())
-                comm.setString(3, etEmail.getText().toString())
-                comm.setString(4, etPass.getText().toString())
-                comm.setString(5, "USUARIO")
-                // run commandto add new rocord
-                comm.executeUpdate()
-            }
-
-        } catch ( e : SQLException) {
-            Toast.makeText(applicationContext , e.message , Toast.LENGTH_LONG).show()
-        }
     }
 }
