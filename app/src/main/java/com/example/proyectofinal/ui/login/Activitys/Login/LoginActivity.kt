@@ -10,18 +10,23 @@ import androidx.appcompat.widget.Toolbar
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-
+import androidx.appcompat.app.AlertDialog
 import com.example.proyectofinal.R
+import com.example.proyectofinal.data.model.Usuario
 import com.example.proyectofinal.ui.login.Activitys.Canchas.CanchasAdminActivity
 import com.example.proyectofinal.ui.login.Activitys.Canchas.CanchasUserActivity
+import com.example.proyectofinal.ui.login.Activitys.Menu.MenuActivity
+import com.example.proyectofinal.ui.login.Utiles.IApiServices
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
 
     var administradores = arrayOf("Eric@istea.com", "Ale@istea.com", "Seba@istea.com")
-
+    var mAPIService: IApiServices? = null
 
     lateinit var toolbar: Toolbar
-    lateinit var etNombre: EditText
     lateinit var etEmail: EditText
     lateinit var etPass: EditText
     lateinit var btnAceptar: Button
@@ -47,26 +52,23 @@ class LoginActivity : AppCompatActivity() {
         btnRegister = findViewById(R.id.btnRegister)
         btnRegister.setTextColor(Color.BLUE)
 
-        val email = etEmail.text.toString()
-        val password = etPass.text.toString()
-
         btnAceptar.setOnClickListener {
 
-            var intent:Intent
-            if (validarCampos()
-                    && validarUsuarioRegistrado()
-                ){
-                /* SI ES ADMIN VA A LA ACTIVITY DE ADMIN SI NO A LA DE USUARIOS */
-                if(validarAdmin()) {
-                    intent =  Intent(this, CanchasAdminActivity::class.java)
+            var intent: Intent
+            if (validarCampos()/* && validarUsuarioRegistrado()*/) {
+                /* SI ES ADMIN VA A LA ACTIVITY DE ADMIN Y SI NO A LA DE USUARIOS */
+                if (validarAdmin()) {
+                    intent = Intent(this, MenuActivity::class.java)
                     startActivity(intent)
-                }else{
-
-                    intent = Intent(this, CanchasUserActivity::class.java)
+                } else {
+                    intent = Intent(this, MenuActivity::class.java)
                     startActivity(intent)
                 }
 
             }
+
+            intent = Intent(this, MenuActivity::class.java)
+            startActivity(intent)
         }
 
         btnRegister.setOnClickListener {
@@ -102,9 +104,37 @@ class LoginActivity : AppCompatActivity() {
         return true
     }
 
-    private fun validarUsuarioRegistrado():Boolean {
+    private fun validarUsuarioRegistrado() : Boolean {
+        var existeUsuario : Boolean = false
+        var email = etEmail.toString()
+        var pass = etPass.toString()
+        mAPIService = IApiServices.ApiUtils.apiService
 
-        return true
+        mAPIService!!.getUserByEmail(email).enqueue(object : Callback<Usuario> {
+
+            override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
+                if (response.isSuccessful()) {
+                    if(response.body()?.password != pass) {
+                        val builder = AlertDialog.Builder(this@LoginActivity)
+                        builder.setTitle(R.string.ocurriounProblema)
+                        builder.setMessage(R.string.passwordIncorrecto)
+                        builder.setPositiveButton(android.R.string.ok) { _,_ ->
+                            Toast.makeText(applicationContext,
+                                android.R.string.ok, Toast.LENGTH_SHORT).show()
+                        }
+                        etPass.error = getString(R.string.passwordIncorrecto)
+                        existeUsuario = false
+                    } else {
+                        existeUsuario = true
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<Usuario>, t: Throwable) {
+                existeUsuario = false
+            }
+        })
+        return existeUsuario
     }
 
     private fun validarAdmin(): Boolean {
@@ -117,44 +147,6 @@ class LoginActivity : AppCompatActivity() {
         }
         return false
     }
-
-
-    /* LECTURA DE LA DB */
-
-    /*
-    *   Statement comm;
-        try {
-        // create command to read data
-            comm = conn.createStatement();
-            ResultSet rs = comm.executeQuery("Select EmployeeID, Firstname From Employees");
-            String msg = "";
-        // read all row
-            while (rs.next()) {
-                msg += "nID: " + rs.getInt("EmployeeID") + " Name: "
-                        + rs.getString("Firstname");
-            }
-            tv.setText(msg);
-        } catch (SQLException e) {
-            tv.setText(e.toString());
-        }
-    * */
-
-    /* ESCRITURA EN LA DB*/
-
-    /*
-    * PreparedStatement comm;
-        try {
-            comm = conn.prepareStatement("insert into Employees("
-                    + "firstname, lastname) values(?,?)");
-            comm.setString(1, etFirst.getText().toString());
-            comm.setString(2, etLast.getText().toString());
-        // run commandto add new rocord
-            comm.executeUpdate();
-        } catch (SQLException e) {
-            tv.setText(e.toString());
-        }
-    *
-    * */
 }
 
 

@@ -1,7 +1,7 @@
 <resources>
     <!-- LOGIN -->
     <string name="ingresar_datos">Ingrese sus datos para poder ingresar</string>
-    <string name="app_name">ProyectoFinal</string>
+    <string name="app_name">Alquila tu Cancha</string>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_nombre">Nombre</string>
     <string name="prompt_apellido">Apellido</string>
@@ -12,14 +12,19 @@
     <string name="cancelar">Cancelar</string>
     <string name="registrarse">No tenes cuenta? Registrate</string>
 
+    <!-- MENU -->
+    <string name="btnReservas">Reservas</string>
+    <string name="btnCanchas">Canchas</string>
+
     <!-- ERRORES Y VALIDACIONES -->
-    <string name="validateNameError">Debes loguearte con un nombre</string>
     <string name="validateEmailError">Debes loguearte con un email</string>
     <string name="validatePassError">Debes colocar el password</string>
-    <string name="title_activity_canchas_admin">CanchasAdminActivity</string>
-    <string name="title_activity_canchas_user">CanchasUserActivity</string>
-    <string name="title_activity_register">RegisterActivity</string>
-
-    <string name="validateEmpty">El campo no puede estar vacio </string>
+    <string name="passwordIguales">Ha ingresado passwords distintos</string>
+    <string name="existeUsuario">El email de usuario ya esta en uso</string>
+    <string name="ocurriounProblema">Ocurrio un problema</string>
+    <string name="validateEmpty">El campo no puede estar vacio</string>
+    <string name="usuarioSinRegistrar">Este usuario no esta registrado</string>
+    <string name="passwordIncorrecto">El password es incorrecto</string>
+    <string name="title_activity_menu">MenuActivity</string>
 
 </resources>

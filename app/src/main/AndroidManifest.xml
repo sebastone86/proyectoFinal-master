@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.example.proyectofinal">
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
             android:allowBackup="true"
@@ -11,11 +12,14 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity
+                android:name=".ui.login.Activitys.Menu.MenuActivity">
+        </activity>
         <activity android:name=".ui.Activitys.Login.RegisterActivity">
         </activity>
-        <activity android:name="com.example.proyectofinal.ui.login.Activitys.Canchas.CanchasUserActivity">
+        <activity android:name=".ui.login.Activitys.Canchas.CanchasUserActivity">
         </activity>
-        <activity android:name="com.example.proyectofinal.ui.login.Activitys.Canchas.CanchasAdminActivity">
+        <activity android:name=".ui.login.Activitys.Canchas.CanchasAdminActivity">
         </activity>
         <activity android:name=".ui.Activitys.Login.LoginActivity">
             <intent-filter>
@@ -25,4 +29,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

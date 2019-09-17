@@ -1,4 +1,4 @@
-package com.example.proyectofinal.ui.login.Model
+package com.example.proyectofinal.ui.login.Utiles
 
 import com.example.proyectofinal.data.model.Usuario
 import okhttp3.OkHttpClient
@@ -11,14 +11,14 @@ import okhttp3.logging.HttpLoggingInterceptor;
 
 interface IApiServices {
 
-    /* Usuario */
-    @GET("user/")
-    fun getAllPosts(): Call<List<Usuario>>
+    /* USUARIO */
+    @GET("users")
+    fun getAllUsers(): Call<List<Usuario>>
 
-    @GET( "user/{id}" )
-    fun getPostById(@Query("id") id: Int) : Call<Usuario>
+    @GET( "/get/{email}" )
+    fun getUserByEmail(@Query("email") email: String) : Call<Usuario>
 
-    @POST("register")
+    @POST("/post/user")
     @FormUrlEncoded
     fun registerUserPost(@Field("email") email: String,
                          @Field("password") password: String,
@@ -31,14 +31,12 @@ interface IApiServices {
 
 
 
-    /* Conection Service */
+    /* CONNECTION SERVICE */
     object ApiUtils {
-
         val BASE_URL = "your_url"
 
         val apiService: IApiServices
             get() = RetrofitClient.getClient(BASE_URL)!!.create(IApiServices::class.java)
-
     }
 
     object RetrofitClient {
@@ -46,7 +44,6 @@ interface IApiServices {
 
         fun getClient(baseUrl: String): Retrofit? {
             if (retrofit == null) {
-                //TODO While release in Google Play Change the Level to NONE
                 val interceptor = HttpLoggingInterceptor()
                 interceptor.level = HttpLoggingInterceptor.Level.BODY
                 val client = OkHttpClient.Builder()
