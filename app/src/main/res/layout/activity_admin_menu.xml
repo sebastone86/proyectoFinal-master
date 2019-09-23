@@ -51,6 +51,9 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+    <TextView android:layout_width="match_parent"
+              android:layout_height="25dp"
+            android:text="Lista de complejos"/>
 
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
