@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.login.Activitys.Menu.UserMenuActivity">
+
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tbMenuUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary" />
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="5dp">
+
+
+        <TextView android:layout_width="match_parent"
+                  android:text="Mis reservas"
+                  android:layout_height="match_parent"/>
+
+      <androidx.appcompat.widget.LinearLayoutCompat android:layout_width="match_parent"
+                                                    android:layout_height="match_parent">
+          <androidx.recyclerview.widget.RecyclerView
+                  android:id="@+id/rvReservas"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+          />
+
+      </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView android:layout_width="match_parent"
+                                                        android:text="Canchas disponibles"
+                                                         android:layout_height="match_parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCanchas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

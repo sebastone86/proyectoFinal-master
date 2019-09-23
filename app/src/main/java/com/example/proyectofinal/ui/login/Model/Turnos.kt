@@ -10,7 +10,7 @@ class Turnos (
     @SerializedName("canchaId")
     var canchaId: Int,
     @SerializedName("fecha")
-    var fecha: Date,
-    @SerializedName("email")
-    var email: String
+    var fecha: Date
+    //@SerializedName("email")
+    //var email: String
 )

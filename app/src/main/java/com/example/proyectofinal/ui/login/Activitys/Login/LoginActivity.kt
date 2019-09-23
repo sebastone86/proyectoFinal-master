@@ -13,9 +13,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.proyectofinal.R
 import com.example.proyectofinal.data.model.Usuario
-import com.example.proyectofinal.ui.login.Activitys.Canchas.CanchasAdminActivity
-import com.example.proyectofinal.ui.login.Activitys.Canchas.CanchasUserActivity
-import com.example.proyectofinal.ui.login.Activitys.Menu.MenuActivity
+import com.example.proyectofinal.ui.login.Activitys.Menu.AdminMenuActivity
+import com.example.proyectofinal.ui.login.Activitys.Menu.UserMenuActivity
 import com.example.proyectofinal.ui.login.Utiles.IApiServices
 import retrofit2.Call
 import retrofit2.Callback
@@ -58,17 +57,14 @@ class LoginActivity : AppCompatActivity() {
             if (validarCampos()/* && validarUsuarioRegistrado()*/) {
                 /* SI ES ADMIN VA A LA ACTIVITY DE ADMIN Y SI NO A LA DE USUARIOS */
                 if (validarAdmin()) {
-                    intent = Intent(this, MenuActivity::class.java)
+                    intent = Intent(this, AdminMenuActivity::class.java)
                     startActivity(intent)
                 } else {
-                    intent = Intent(this, MenuActivity::class.java)
+                    intent = Intent(this, UserMenuActivity::class.java)
                     startActivity(intent)
                 }
 
             }
-
-            intent = Intent(this, MenuActivity::class.java)
-            startActivity(intent)
         }
 
         btnRegister.setOnClickListener {

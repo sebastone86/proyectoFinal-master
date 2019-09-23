@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.proyectofinal">
+          xmlns:tools="http://schemas.android.com/tools" package="com.example.proyectofinal">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -11,22 +11,25 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-        <activity
-                android:name=".ui.login.Activitys.Menu.MenuActivity">
-        </activity>
-        <activity android:name=".ui.Activitys.Login.RegisterActivity">
-        </activity>
-        <activity android:name=".ui.login.Activitys.Canchas.CanchasUserActivity">
-        </activity>
-        <activity android:name=".ui.login.Activitys.Canchas.CanchasAdminActivity">
-        </activity>
+            android:theme="@style/AppTheme"
+            >
+
         <activity android:name=".ui.Activitys.Login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".ui.login.Activitys.Menu.UserMenuActivity">
+        </activity>
+        <activity android:name=".ui.login.Activitys.Menu.AdminMenuActivity">
+        </activity>
+        <activity android:name=".ui.Activitys.Login.RegisterActivity">
+        </activity>
+        <activity android:name=".ui.login.Activitys.Canchas.CanchasUserActivity">
+        </activity>
+        <activity android:name=".ui.login.Activitys.Canchas.CanchasAdminActivity">
         </activity>
     </application>
 
